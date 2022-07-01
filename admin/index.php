@@ -36,7 +36,7 @@
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-              <img src="images/faces/face28.png" alt="profile"/>
+              ADMIN <img src="images/faces/face28.png" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item" href="/monitoring-website/index.php">
@@ -63,13 +63,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/monitoring-website/admin/pages/forms/basic_elements.html">
+            <a class="nav-link" href="/monitoring-website/admin/pages/forms/basic_elements.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">Registration Forms</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/monitoring-website/admin/pages/tables/basic-table.html">
+            <a class="nav-link" href="/monitoring-website/admin/pages/tables/basic-table.php">
               <i class="ti-view-list-alt menu-icon"></i>
               <span class="menu-title">Informations</span>
             </a>
