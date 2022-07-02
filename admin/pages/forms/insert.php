@@ -1,55 +1,51 @@
+<html>
 <?php
-$link = mysqli_connect("192.168.1.18", "rvmmonitor", "LEAAT32!", "adminRVM");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
- 
-// Escape user inputs for security
-$first_name = mysqli_real_escape_string($link, $_REQUEST['firstname']);
-$last_name = mysqli_real_escape_string($link, $_REQUEST['lastname']);
-$name = $first_name.$last_name;
-$email = mysqli_real_escape_string($link, $_REQUEST['email']);
-$contact = mysqli_real_escape_string($link, $_REQUEST['contact']);
-$address = mysqli_real_escape_string($link, $_REQUEST['address']);
-$barangay = mysqli_real_escape_string($link, $_REQUEST['barangay']);
-$city = mysqli_real_escape_string($link, $_REQUEST['city']);
-$postal = mysqli_real_escape_string($link, $_REQUEST['postal']);
+        $conn = mysqli_connect("192.168.1.18", "rvmmonitor", "LEAAT32!", "adminRVM");
+         
+        // Check connection
+        if($conn === false){
+            die("ERROR: Could not connect. "
+                . mysqli_connect_error());
+        }
+         
+        // Taking all values from the form data(input)
+        $name = $_REQUEST['firstname']." ".$_REQUEST['lastname'];
+        $email = $_REQUEST['email'];
+        $contact = $_REQUEST['contact'];
+        $address = $_REQUEST['address'];
+        $barangay = $_REQUEST['barangay'];
+        $city = $_REQUEST['city'];
+        $postal = $_REQUEST['postal'];
+        
+        $username = $_REQUEST['usern'];
+        
+        $password = $_REQUEST['pw'];
+        $confirmPw = $_REQUEST['confirmpw'];
 
-$username = mysqli_real_escape_string($link, $_REQUEST['usern']);
 
-$password = mysqli_real_escape_string($link, $_REQUEST['pw']);
-$confirmPw = mysqli_real_escape_string($link, $_REQUEST['confirmpw']);
 
-$sql = "SELECT * FROM `Employee_LogIn` BY user_id DESC LIMIT 1;";
-$result = $link->query($sql);
-$id=$result;
-echo $name;
-echo $email;
-echo $contact;
-echo $address;
-echo $barangay;
-echo $city;
-echo $postal;
-echo $username;
-echo $password;
+        if($password==$confirmPw){
 
-if($password==$confirmPw){
-    $id+=1;
-// Attempt insert query execution
-$sql = "INSERT INTO `Personal_Info` (user_id,name,email,contact_no) VALUES ('$id','$name', '$email', '$contact'); INSERT INTO `Person_Address` (user_id,address,barangay,city,postal_no) VALUES ('$id','$address', '$barangay', '$city','$postal'); INSERT INTO `Employee_LogIn` (user_id,role,usern,pw) VALUES ('$id','employee', '$username', '$password');";
+        // Attempt insert query execution
+        $sql = "INSERT INTO `Personal_Info` (name,email,contact_no) VALUES ('$name', '$email', '$contact');";
+        $sql2 = "INSERT INTO `Person_Address` (address,barangay,city,postal_no) VALUES ('$address', '$barangay', '$city','$postal')";
+        $sql3 = "INSERT INTO `Employee_LogIn` (role,usern,pw) VALUES ('employee', '$username', '$password');";
+        if(mysqli_query($conn, $sql)){
+                mysqli_query($conn,$sql2);
+                mysqli_query($conn,$sql3);
 
-if(mysqli_query($link, $sql)){
-    echo "Records added successfully.";
-} else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
-}
- 
-// Close connection
-mysqli_close($link);
-}
-else{
-    echo "Passwords do not match.";
-}
-?>
+                echo "<script type='javascript'>alert('Record successfully added.');</script>";
+
+                header("location:basic_elements.php");
+
+        } else{
+            echo "ERROR: Hush! Sorry $sql. "
+                . mysqli_error($conn);
+        }
+         
+        // Close connection
+        mysqli_close($conn);
+    }
+        ?>
+
+        </html>

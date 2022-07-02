@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -10,8 +10,6 @@
   <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" href="../../vendors/base/vendor.bundle.base.css">
   <!-- endinject -->
-  <!-- plugin css for this page -->
-  <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="../../css/style.css">
   <!-- endinject -->
@@ -19,12 +17,39 @@
 </head>
 
 <body>
+  <?php require_once 'process.php'; ?>
+  
+
+  <?php
+    $mysqli = new mysqli("192.168.1.18", "rvmmonitor", "LEAAT32!", "adminRVM");
+
+    $stmt1 = "SELECT * FROM Personal_Info";
+    $stmt2 = "SELECT * FROM Person_Address";
+    $stmt3 = "SELECT * FROM Employee_LogIn";
+    $stmt4 = "SELECT * FROM RVM_Assign";
+
+    $result1 = $mysqli->query($stmt1);
+    $result2 = $mysqli->query($stmt2);
+    $result3 =  $mysqli->query($stmt3);
+    $result4 =  $mysqli->query($stmt4);
+    
+    
+    // pre_r($result1->fetch_assoc());
+    // pre_r($result2->fetch_assoc());
+    // pre_r($result3->fetch_assoc());
+
+    function pre_r($array){
+      echo "<pre>";
+      print_r($array);
+      echo "</pre>";
+    }
+  ?>
   <div class="container-scroller">
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo me-5" href="../../index.php"><img src="../../images/logo.svg" class="me-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="../../index.php"><img src="../../images/logo-mini.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo me-5" href="../../index.html"><img src="../../images/logo.svg" class="me-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="../../images/logo-mini.svg" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -32,7 +57,7 @@
         </button>
         <ul class="navbar-nav mr-lg-2">
         </ul>
-        <ul class="navbar-nav navbar-nav-right"> 
+        <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
               ADMIN <img src="../../images/faces/face28.png" alt="profile"/>
@@ -56,34 +81,81 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="../../index.php">
-              <i class="ti-shield menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="../../pages/forms/basic_elements.php">
               <i class="ti-layout-list-post menu-icon"></i>
-              <span class="menu-title">Registration Forms</span>
+              <span class="menu-title">Go Back</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../../pages/tables/basic-table.php">
+            <a class="nav-link" href="../../pages/tables/edit-person-info.php">
               <i class="ti-view-list-alt menu-icon"></i>
-              <span class="menu-title">Informations</span>
+              <span class="menu-title">Edit</span>
             </a>
           </li>
         </ul>
       </nav>
       <!-- partial -->
-      <div class="main-panel">        
+      <?php
+        if(isset($_SESSION['message'])):?>
+
+        <div class="alert alert-<?=$_SESSION['msg_type']?>">
+          <?php 
+          echo $SESSION['message'];
+          unset($_SESSION['message']); 
+          ?>
+
+        </div>
+
+      <?php endif ?>
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Employee's Information Sheet</h4>
+                  <p class="card-description">
+                    ASSIGNED EMPLOYEES IN DIFFERENT LOCATIONS
+                  </p>
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>User ID</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Contact No.</th>
+                          <th colspan="2">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                          while($row1 = $result1->fetch_assoc()){
+                                  echo "<tr><td>".$row1['user_id']."</td>
+                                    <td>".$row1['name']."</td><td>".$row1['email'].
+                                    "</td><td>".$row1['contact_no']."</td>";
+
+                                  echo "<td><a href='edit-person-info.php?edit=".$row1['user_id']."' class='btn btn-info'>Edit</a></td>";
+                                  echo "<td><a href='edit-person-info.php?delete=".$row1['user_id']."' class='btn btn-danger'>Delete</a></td>";
+                          }
+
+                        ?>
+
+                          </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                
+              </div>
+              
+            </div> 
         <div class="content-wrapper">
           <div class="row">
             <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">CREATE NEW EMPLOYEE ACCOUNT</h4>
-                  <form class="form-sample" action="insert.php" method="POST">
+                  <form class="form-sample" action="process.php" method="POST">
                     <p class="card-description">
                       Personal Information
                     </p>
@@ -167,6 +239,7 @@
                           </div>
                         </div>
                       </div>
+
                       <!--ROW-->
                       <p class="card-description">
                         Log In Information
@@ -207,34 +280,39 @@
                       <div class="card-body">
                           <div class="template-demo">
                             <label class="form-check-label">
-                              <button type="submit" name="add" class="btn btn-outline-green btn-fw">Submit</button>
+                              <button type="submit" name="save-login" class="btn btn-outline-green btn-fw">Save</button>
                             </label>
                           </div>
 			                  </div>
                       </div>
                   </form>
-
-		 	             
-                       </div>
-                    </div>
-                  
-                </div>
-              </div>
-            </div>
           </div>
+                          </div>
+                          </div>
+          
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:../../partials/_footer.html -->
         <!-- partial -->
+        
       </div>
       <!-- main-panel ends -->
+
+      
     </div>
+                          </div>
+                          </div>
+                          </div>
+                          </div>
     <!-- page-body-wrapper ends -->
-  </div>
+    
+  
   <!-- container-scroller -->
   <!-- plugins:js -->
   <script src="../../vendors/base/vendor.bundle.base.js"></script>
   <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <!-- End plugin js for this page-->
   <!-- inject:js -->
   <script src="../../js/off-canvas.js"></script>
   <script src="../../js/hoverable-collapse.js"></script>
@@ -242,7 +320,6 @@
   <script src="../../js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="../../js/file-upload.js"></script>
   <!-- End custom js for this page-->
 </body>
 

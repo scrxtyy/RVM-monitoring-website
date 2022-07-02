@@ -142,60 +142,22 @@
                     <table class="table table-hover">
                       <thead>
                         <tr>
-			  <th>RVM ID</th>
+			                    <th>RVM ID</th>
                           <th>User ID</th>
                           <th>Name</th>
                           <th>Barangay</th>
-			  <th>City</th>
+			                    <th>City</th>
                           <th>Contact No.</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-			  <td>R1920</td>
-                          <td>lalalalisa_m</td>
-                          <td>LALISA DELA CUESTA</td>
-                          <td>MALUSAK</td>
-                          <td>SANTA ROSA, LAGUNA</td>
-			  <td>09165928659</td>
-                        </tr>
-                        <tr>
-                          <td>R7283</td>
-			  <td>jennierubyjane</td>
-                          <td>JENNIE CATACUTAN</td>
-                          <td>MARKET AREA</td>
-                          <td>CARMONA, CAVITE</td>
-			  <td>09557303586</td>
-                        </tr>
-                        <tr>
-                          <td>R1297</td>
-			  <td>roses_are_rosie</td>
-                          <td>ROSIE FLORES</td>
-                          <td>DITA</td>
-                          <td>SANTA ROSA, LAGUNA</td>
-			  <td>09557303584</td>
-                        </tr>
-                        <tr>
-                          <td>R4583</td>
-			  <td>sooyaaa__</td>
-                          <td>JISOO SAN JOSE</td>
-                          <td>KANLURAN</td>
-                          <td>SANTA ROSA, LAGUNA</td>
-			  <td>09384602238</td>
-                        </tr>
-                        <tr>
-                          <td>R3480</td>
-			  <td>odettecantswim</td>
-                          <td>ODETTE RIVERA</td>
-                          <td>DON JOSE</td>
-                          <td>SANTA ROSA, LAGUNA</td>
-			  <td>09559176371</td>
-                        </tr>
                       </tbody>
                     </table>
                   </div>
+                  <button name="like" class="btn btn-lg btn-outline-light text-primary rounded-0 border-0 d-none d-md-block" type="button" onclick="location.href = 'edit-person-info.php'"> Edit Data on Table</button>
                 </div>
               </div>
+              
             </div>
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
