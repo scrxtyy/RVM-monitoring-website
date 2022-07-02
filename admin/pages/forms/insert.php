@@ -9,7 +9,8 @@
         }
          
         // Taking all values from the form data(input)
-        $name = $_REQUEST['firstname']." ".$_REQUEST['lastname'];
+        $firstname = $_REQUEST['firstname'];
+        $lastname= $_REQUEST['lastname'];
         $email = $_REQUEST['email'];
         $contact = $_REQUEST['contact'];
         $address = $_REQUEST['address'];
@@ -27,7 +28,7 @@
         if($password==$confirmPw){
 
         // Attempt insert query execution
-        $sql = "INSERT INTO `Personal_Info` (name,email,contact_no) VALUES ('$name', '$email', '$contact');";
+        $sql = "INSERT INTO `Personal_Info` (first_name,last_name,email,contact_no) VALUES ('$firstname','$lastname', '$email', '$contact');";
         $sql2 = "INSERT INTO `Person_Address` (address,barangay,city,postal_no) VALUES ('$address', '$barangay', '$city','$postal')";
         $sql3 = "INSERT INTO `Employee_LogIn` (role,usern,pw) VALUES ('employee', '$username', '$password');";
         if(mysqli_query($conn, $sql)){

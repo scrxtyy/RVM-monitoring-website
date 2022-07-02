@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <?php require_once 'process.php'; ?>
+  <?php include_once 'process.php'; ?>
   
 
   <?php
@@ -95,28 +95,15 @@
         </ul>
       </nav>
       <!-- partial -->
-      <?php
-        if(isset($_SESSION['message'])):?>
 
-        <div class="alert alert-<?=$_SESSION['msg_type']?>">
-          <?php 
-          echo $SESSION['message'];
-          unset($_SESSION['message']); 
-          ?>
-
-        </div>
-
-      <?php endif ?>
       <div class="main-panel">
         <div class="content-wrapper">
+
           <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Employee's Information Sheet</h4>
-                  <p class="card-description">
-                    ASSIGNED EMPLOYEES IN DIFFERENT LOCATIONS
-                  </p>
                   <div class="table-responsive">
                     <table class="table table-hover">
                       <thead>
@@ -132,7 +119,7 @@
                         <?php
                           while($row1 = $result1->fetch_assoc()){
                                   echo "<tr><td>".$row1['user_id']."</td>
-                                    <td>".$row1['name']."</td><td>".$row1['email'].
+                                    <td>".$row1['first_name']." ".$row1['last_name']."</td><td>".$row1['email'].
                                     "</td><td>".$row1['contact_no']."</td>";
 
                                   echo "<td><a href='edit-person-info.php?edit=".$row1['user_id']."' class='btn btn-info'>Edit</a></td>";
@@ -146,7 +133,18 @@
                     </table>
                   </div>
                 </div>
-                
+                <?php
+                  if(isset($_SESSION['message'])){?>
+
+                  <div class="alert alert-<?=$_SESSION['msg_type']?>">
+                    <?php 
+                    echo $_SESSION['message'];
+                    unset($_SESSION['message']); 
+                    ?>
+
+                  </div>
+
+                  <?php } ?>
               </div>
               
             </div> 
@@ -155,17 +153,19 @@
             <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
+                <h4 class="card-title">Insert or Edit Info:</h4>
                   <form class="form-sample" action="process.php" method="POST">
                     <p class="card-description">
                       Personal Information
                     </p>
+                    <input type="hidden" name="id" value="<?php echo $id; ?>">
                     <!--ROW-->
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">First Name: </label>
                             <div class="col-sm-9">
-                              <input type="text" name="firstname" class="form-control" required>
+                              <input type="text" value="<?php echo $firstname; ?>" name="firstname" class="form-control" required>
                             </div>
                           </div>
                         </div>
@@ -173,7 +173,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Last Name: </label>
                             <div class="col-sm-9">
-                              <input type="text" name="lastname" class="form-control" required>
+                              <input type="text" value="<?php echo $lastname; ?>" name="lastname" class="form-control" required>
                             </div>
                           </div>
                         </div>
@@ -184,7 +184,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Contact Number: </label>
                             <div class="col-sm-9">
-                              <input type="text" name="contact" class="form-control" required>
+                              <input type="text" value="<?php echo $contact; ?>" name="contact" class="form-control" required>
                             </div>
                           </div>
                         </div>
@@ -192,7 +192,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Email: </label>
                             <div class="col-sm-9">
-                              <input type="text" name="email" class="form-control" required>
+                              <input type="text" value="<?php echo $email; ?>" name="email" class="form-control" required>
                             </div>
                           </div>
                         </div>
@@ -207,7 +207,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Address: </label>
                             <div class="col-sm-9">
-                              <input type="text" name="address" class="form-control" required>
+                              <input type="text" value="<?php echo $address; ?>" name="address" class="form-control" required>
                             </div>
                           </div>
                         </div>
@@ -215,7 +215,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Barangay: </label>
                             <div class="col-sm-9">
-                              <input type="text" name="barangay" class="form-control" required>
+                              <input type="text" value="<?php echo $barangay; ?>" name="barangay" class="form-control" required>
                             </div>
                           </div>
                         </div>
@@ -226,7 +226,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">City: </label>
                             <div class="col-sm-9">
-                              <input type="text" name="city" class="form-control" value="Santa Rosa" required>
+                              <input type="text" value="<?php echo $city; ?>" name="city" class="form-control" value="Santa Rosa" required>
                             </div>
                           </div>
                         </div>
@@ -234,7 +234,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Postal Code: </label>
                             <div class="col-sm-9">
-                              <input type="text" name="postal" class="form-control" value="4026" required>
+                              <input type="text"value="<?php echo $postal; ?>" name="postal" class="form-control" value="4026" required>
                             </div>
                           </div>
                         </div>
@@ -249,7 +249,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Username: </label>
                             <div class="col-sm-9">
-                              <input type="text" name="usern" class="form-control" required>
+                              <input type="text" value="<?php echo $username; ?>" name="usern" class="form-control" required>
                             </div>
                           </div>
                         </div>
@@ -261,7 +261,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Password: </label>
                             <div class="col-sm-9">
-                              <input type="password" name="pw" class="form-control" required>
+                              <input type="password" value="<?php echo $password; ?>" name="pw" class="form-control" required>
                             </div>
                           </div>
                         </div>
@@ -276,15 +276,30 @@
                         
                       </div>
                       <!--ROW-->
+                      <?php 
+                        if ($update == true){ ?>
+                        <div class="row">
+                          <div class="card-body">
+                            <div class="template-demo">
+                              <label class="form-check-label">
+                                <button type="submit" name="update" class="btn btn-outline-green btn-fw">Update</button>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      <?php
+                        }else {
+                      ?>
                       <div class="row">
                       <div class="card-body">
                           <div class="template-demo">
                             <label class="form-check-label">
-                              <button type="submit" name="save-login" class="btn btn-outline-green btn-fw">Save</button>
+                              <button type="submit" name="save-login" class="btn btn-outline-green btn-fw">Add Record</button>
                             </label>
                           </div>
 			                  </div>
                       </div>
+                      <?php }?>
                   </form>
           </div>
                           </div>
