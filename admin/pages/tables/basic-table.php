@@ -17,6 +17,22 @@
 </head>
 
 <body>
+  <?php
+    $mysqli = new mysqli("192.168.1.18", "rvmmonitor", "LEAAT32!", "adminRVM");
+
+    $stmt1 = "SELECT * FROM Personal_Info";
+    $stmt2 = "SELECT * FROM Person_Address";
+    $stmt3 = "SELECT * FROM Employee_LogIn";
+    $stmt4 = "SELECT * FROM RVM_Assign";
+    $stmt5 = "SELECT * FROM RVM_MonitorLog";
+
+    $result1 = $mysqli->query($stmt1);
+    $result2 = $mysqli->query($stmt2);
+    $result3 =  $mysqli->query($stmt3);
+    $result4 =  $mysqli->query($stmt4);
+    $result5 = $mysqli->query($stmt5);
+    
+  ?>
   <div class="container-scroller">
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -89,41 +105,20 @@
                       <thead>
                         <tr>
                           <th>RVM ID</th>
-                          <th>Location</th>
+                          <th>Date/Time</th>
                           <th>Weight Status</th>
                           <th>Coins Remaining</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td>R1920</td>
-                          <td>CITY HALL, STA. ROSA</td>
-                          <td>35KG</td>
-                          <td>130 COINS</td>
-                        </tr>
-                        <tr>
-                          <td>R7283</td>
-                          <td>CARMONA, CAVITE</td>
-                          <td class="text-danger">49KG</td>
-                          <td>102 COINS</td>
-                        </tr>
-                        <tr>
-                          <td>R1297</td>
-                          <td>BRGY. DITA, STA. ROSA</td>
-                          <td>20KG</td>
-                          <td>160 COINS</td>
-                        </tr>
-                        <tr>
-                          <td>R4583</td>
-                          <td>PUP STA. ROSA</td>
-                          <td>10KG</td>
-                          <td>180 COINS</td>
-                        </tr>
-                        <tr>
-                          <td>R3480</td>
-                          <td>BRGY. MESA HOMES, DON JOSE</td>
-                          <td>5KG</td>
-                          <td>190 COINS</td>
+                          <?php
+                        while($row5 = $result5->fetch_assoc()){
+                                  echo "<tr><td>".$row5['rvm_id']."</td>
+                                    <td>".$row5['date']." ".$row5['time']."</td><td>".$row5['weight_in_kg']." KG</td><td>".$row5['coins_amt_php'].
+                                    " PHP</td><td>";
+                                  }
+                                  ?>
                         </tr>
                       </tbody>
                     </table>
@@ -142,15 +137,22 @@
                     <table class="table table-hover">
                       <thead>
                         <tr>
-			                    <th>RVM ID</th>
                           <th>User ID</th>
                           <th>Name</th>
-                          <th>Barangay</th>
-			                    <th>City</th>
+                          <th>Email</th>
                           <th>Contact No.</th>
+                          <th>Address</th>
                         </tr>
                       </thead>
                       <tbody>
+                        <?php
+
+                                while(($row1 = $result1->fetch_assoc()) && ($row2 = $result2->fetch_assoc())){
+                                  echo "<tr><td>".$row1['user_id']."</td>
+                                    <td>".$row1['first_name']." ".$row1['last_name']."</td><td>".$row1['email'].
+                                    "</td><td>".$row1['contact_no']."</td><td>".$row2['address']. " ".$row2['barangay']." ".$row2['city']."</td></tr>";
+                                  }
+                          ?>
                       </tbody>
                     </table>
                   </div>

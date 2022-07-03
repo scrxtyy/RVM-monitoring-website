@@ -17,6 +17,7 @@ $mysqli = new mysqli("192.168.1.18", "rvmmonitor", "LEAAT32!", "adminRVM");
     
         $username = '';
         $password = '';
+        $rvmassign = '';
 
 
 if (isset($_POST['save-login'])){  
@@ -35,6 +36,8 @@ if (isset($_POST['save-login'])){
     $password = $_POST['pw'];
     $confirmPw = $_POST['confirmpw'];
 
+    $rvm_assign = $_POST['rvm-assign'];
+
     $_SESSION['message'] = "Record has been saved.";
     $_SESSION['msg_type']="success";
 
@@ -44,7 +47,7 @@ if (isset($_POST['save-login'])){
 
     $mysqli->query("INSERT INTO `Employee_LogIn` (role,usern,pw) VALUES ('employee', '$username', '$password');");
     
-
+    $mysqli->query("INSERT INTO `RVM_Assign` (rvm_id) VALUES ('$rvm_assign');");
 
     header("location: edit-person-info.php");
 
@@ -53,9 +56,11 @@ if (isset($_POST['save-login'])){
 
 else if(isset($_GET['delete'])){
     $id = $_GET['delete'];
+
     $mysqli->query("DELETE FROM Personal_Info WHERE user_id=$id");
     $mysqli->query("DELETE FROM Employee_LogIn WHERE user_id=$id");
     $mysqli->query("DELETE FROM Person_Address WHERE user_id=$id");
+    $mysqli->query("DELETE FROM RVM_Assign WHERE user_id=$id");
 
     $_SESSION['message'] = "Record has been deleted.";
     $_SESSION['msg_type']= "danger";
@@ -63,11 +68,12 @@ else if(isset($_GET['delete'])){
     $person_infoMax = intval($mysqli->query("SELECT MAX( `user_id` ) FROM `Personal_Info` ;"));
     $login_Max = intval($mysqli->query("SELECT MAX( `user_id` ) FROM `Employee_LogIn` ;"));
     $address_Max = intval($mysqli->query("SELECT MAX( `user_id` ) FROM `Person_Address` ;"));
+    $assign_Max = intval($mysqli->query("SELECT MAX( `user_id` ) FROM `RVM_Assign` ;"));
 
     $mysqli->query("ALTER TABLE `Personal_Info` AUTO_INCREMENT = $person_infoMax;");
     $mysqli->query("ALTER TABLE `Employee_LogIn` AUTO_INCREMENT = $login_Max;");
     $mysqli->query("ALTER TABLE `Person_Address` AUTO_INCREMENT = $address_Max;");
-        
+    $mysqli->query("ALTER TABLE `RVM_Assign` AUTO_INCREMENT = $assign_Max;");
 
     header("location: edit-person-info.php");
 }
@@ -78,6 +84,7 @@ else if(isset($_GET['edit'])){
     $result1 = $mysqli->query("SELECT * FROM Personal_Info WHERE user_id = $id");
     $result2 = $mysqli->query("SELECT * FROM Person_Address WHERE user_id = $id");
     $result3 = $mysqli->query("SELECT * FROM Employee_LogIn WHERE user_id = $id");
+    $result4 = $mysqli->query("SELECT * FROM RVM_Assign WHERE user_id = $id");
     
     if((mysqli_num_rows($result1)==1)&&(mysqli_num_rows($result2)==1)&&(mysqli_num_rows($result3)==1)){
         $row1 = $result1->fetch_array();
@@ -98,6 +105,9 @@ else if(isset($_GET['edit'])){
         $row3 = $result3->fetch_array();
         $username = $row3['usern'];
         $password = $row3['pw'];
+
+        $row4 = $result4->fetch_array();
+        $rvmassign=$row4['rvm_id'];
     }
 }
 
@@ -127,4 +137,6 @@ else if(isset($_POST['update'])){
     header("location: edit-person-info.php");
 
 }
+
+
 ?>
