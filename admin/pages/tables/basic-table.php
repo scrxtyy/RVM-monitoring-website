@@ -18,7 +18,7 @@
 
 <body>
   <?php
-    $mysqli = new mysqli("192.168.1.18", "rvmmonitor", "LEAAT32!", "adminRVM");
+    $mysqli = new mysqli("localhost", "root", "", "adminRVM");
 
     $stmt1 = "SELECT * FROM Personal_Info";
     $stmt2 = "SELECT * FROM Person_Address";

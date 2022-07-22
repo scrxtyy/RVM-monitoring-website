@@ -1,6 +1,6 @@
 <html>
 <?php
-        $conn = mysqli_connect("192.168.1.18", "rvmmonitor", "LEAAT32!", "adminRVM");
+        $conn = mysqli_connect("192.168.0.31", "rvmmonitor", "LEAAT32!", "adminRVM");
          
         // Check connection
         if($conn === false){

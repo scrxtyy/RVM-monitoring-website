@@ -180,6 +180,22 @@
                             </div>
                           </div>
                         </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Assign RVM: </label>
+                            <div class="col-sm-9">
+                              <select class="form-select" name="rvm-assign" required>
+                                <?php
+
+                                $result5 = $mysqli->query("SELECT * FROM RVM_MonitorLog");
+                                while($row5 = $result5->fetch_assoc()){
+                                  echo "<option value=".$row5['rvm_id'].">".$row5['rvm_id']."</option>"; 
+                                }
+                                ?>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
 
                       </div>
                       <!--ROW-->

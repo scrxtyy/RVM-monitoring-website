@@ -21,7 +21,7 @@
   
 
   <?php
-    $mysqli = new mysqli("192.168.1.18", "rvmmonitor", "LEAAT32!", "adminRVM");
+    $mysqli = new mysqli("localhost", "root", "", "adminRVM");
 
     $stmt1 = "SELECT * FROM Personal_Info";
     $stmt2 = "SELECT * FROM Person_Address";
@@ -34,7 +34,7 @@
     $result3 =  $mysqli->query($stmt3);
     $result4 =  $mysqli->query($stmt4);
     $result5 = $mysqli->query($stmt5);
-    
+
     
     // pre_r($result1->fetch_assoc());
     // pre_r($result2->fetch_assoc());
@@ -83,13 +83,13 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="../../pages/forms/basic_table.php">
+            <a class="nav-link" href="../forms/basic_table.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">Go Back</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../../pages/tables/edit-person-info.php">
+            <a class="nav-link" href="../tables/edit-person-info.php">
               <i class="ti-view-list-alt menu-icon"></i>
               <span class="menu-title">Edit</span>
             </a>
@@ -169,15 +169,17 @@
                       </thead>
                       <tbody>
                         <?php
-                          //while($row1 = $result1->fetch_assoc()){
+                        $result3 =  $mysqli->query("SELECT * FROM Employee_LogIn");
+                        $result4 =  $mysqli->query("SELECT * FROM RVM_Assign");
+
                             while($row3 = $result3->fetch_assoc()){
                                   echo "<tr><td>".$row3['user_id']."</td><td>".$row3['usern'].
                                     "</td><td>".$row3['pw']."</td>";
 
                                   echo "<td><a href='edit-person-info.php?edit=".$row3['user_id']."' class='btn btn-info'>Edit</a></td>";
                                   echo "<td><a href='edit-person-info.php?delete=".$row3['user_id']."' class='btn btn-danger'>Delete</a></td>";
-                          }
-                        //}
+                        
+                        }
 
                         ?>
 
@@ -306,16 +308,18 @@
                             </div>
                           </div>
                         </div>
+
                         <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Assign RVM: </label>
                             <div class="col-sm-9">
-                              <select class="form-select" name="rvm-assign" aria-labelledby="Default select example">
+                              <select class="form-select" name="rvm-assign" required>
                                 <option selected><?php echo $rvmassign; ?></option>
                                 <?php
-                                while($row5 = $result5->fetch_assoc()){
-                                  echo "<option value=".$row5['rvm_id'].">".$row5['rvm_id']."</option>"; 
-                                }
+                                  $result5 = $mysqli->query("SELECT * FROM RVM_MonitorLog");
+                                  while($row5 = $result5->fetch_assoc()){
+                                    echo "<option value=".$row5['rvm_id'].">".$row5['rvm_id']."</option>"; 
+                                  }
                                 ?>
                               </select>
                             </div>

@@ -3,9 +3,9 @@
 <?php
 session_start();
 $msg = "";
-$servername="192.168.1.18";
-$username="rvmmonitor";
-$password= "LEAAT32!";
+$servername="localhost";
+$username="root";
+$password= "";
 $dbname="adminRVM";
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 //uncomment line below to check if connection is working:
@@ -70,7 +70,7 @@ $_SESSION['login'] = true;
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
 					<h2 class="heading-section" style="padding-top:0pt!important;margin-top:0pt!important;">RVM MONITORING SYSTEM</h2>
-                    <p style="align-items: center;">Please enter admin/employee details.<br>> admin: reverse32 LEAAT32!<br>> employee: rvm0001 1234</p>
+                    <p style="align-items: center;">Please enter admin/employee details.</p>
 				</div>
 			</div>
 			<div class="row justify-content-center">

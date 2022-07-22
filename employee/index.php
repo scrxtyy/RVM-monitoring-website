@@ -40,9 +40,9 @@
             <a class="nav-link" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifications 
                 <?php
 
-                define('DBINFO', 'mysql:host=192.168.1.18;dbname=RVM001');
-                define('DBUSER','rvmmonitor');
-                define('DBPASS','LEAAT32!');
+                define('DBINFO', 'mysql:host=localhost;dbname=notificationsystem');
+                define('DBUSER','root');
+                define('DBPASS','');
 
                 function fetchAll($query){
                     $con = new PDO(DBINFO, DBUSER, DBPASS);

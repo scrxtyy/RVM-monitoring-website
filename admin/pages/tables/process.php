@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$mysqli = new mysqli("192.168.1.18", "rvmmonitor", "LEAAT32!", "adminRVM");
+$mysqli = new mysqli("localhost", "root", "", "adminRVM");
 
         $update=false;  
         $id = 0;

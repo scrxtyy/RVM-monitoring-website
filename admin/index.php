@@ -162,7 +162,7 @@
                         <?php
                         //error_reporting(0);
  
-                        $conn = mysqli_connect("192.168.1.18", "rvmmonitor", "LEAAT32!", "adminRVM");
+                        $conn = mysqli_connect("localhost", "root", "", "adminRVM");
                         // Check connection
                         if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
@@ -180,9 +180,9 @@
                             $conn->close();
         
                     
-                            define('DBINFO', 'mysql:host=192.168.1.18;dbname=RVM001');
-                            define('DBUSER','rvmmonitor');
-                            define('DBPASS','LEAAT32!');
+                            define('DBINFO', 'mysql:host=localhost;dbname=notificationsystem');
+                            define('DBUSER','root');
+                            define('DBPASS','');
                         
                             function fetchAll($query){
                                 $con = new PDO(DBINFO, DBUSER, DBPASS);
@@ -208,7 +208,6 @@
                           alert('Notification sent.');
                           </script>
                           <?php
-                            header("location:index.php");
                         }
                     }
                   ?>
