@@ -23,16 +23,16 @@
   <?php
     $mysqli = new mysqli("localhost", "root", "", "adminRVM");
 
-    $stmt1 = "SELECT * FROM Personal_Info";
-    $stmt2 = "SELECT * FROM Person_Address";
-    $stmt3 = "SELECT * FROM Employee_LogIn";
-    $stmt4 = "SELECT * FROM RVM_Assign";
+    $stmt1 = "SELECT * FROM Personal_Info LIMIT 1,10000";
+    $stmt2 = "SELECT * FROM Person_Address LIMIT 1,10000";
+    $stmt3 = "SELECT * FROM Employee_LogIn  LIMIT 1,10000";
+    $stmt4 = "SELECT * FROM RVM_Assign  LIMIT 1,10000";
     $stmt5 = "SELECT * FROM RVM_MonitorLog";
 
     $result1 = $mysqli->query($stmt1);
     $result2 = $mysqli->query($stmt2);
     $result3 =  $mysqli->query($stmt3);
-    $result4 =  $mysqli->query($stmt4);
+    $result4 =  $mysqli->query("SELECT * FROM RVM_Assign  LIMIT 1,10000");
     $result5 = $mysqli->query($stmt5);
 
     
@@ -83,13 +83,13 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="../forms/basic_table.php">
+            <a class="nav-link" href="basic-table.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">Go Back</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../tables/edit-person-info.php">
+            <a class="nav-link" href="edit-person-info.php">
               <i class="ti-view-list-alt menu-icon"></i>
               <span class="menu-title">Edit</span>
             </a>
@@ -162,6 +162,7 @@
                       <thead>
                         <tr>
                           <th>User ID</th>
+                          <th>Assigned RVM ID</th>
                           <th>Username</th>
                           <th>Password</th>
                           <th colspan="2">Action</th>
@@ -169,11 +170,10 @@
                       </thead>
                       <tbody>
                         <?php
-                        $result3 =  $mysqli->query("SELECT * FROM Employee_LogIn");
-                        $result4 =  $mysqli->query("SELECT * FROM RVM_Assign");
 
-                            while($row3 = $result3->fetch_assoc()){
-                                  echo "<tr><td>".$row3['user_id']."</td><td>".$row3['usern'].
+                            while(($row3 = $result3->fetch_assoc()) && ($row4 = $result4->fetch_assoc())){
+                                  echo "<tr><td>".$row3['user_id']."</td><td>".$row4['rvm_id'].
+                                  "</td><td>".$row3['usern'].
                                     "</td><td>".$row3['pw']."</td>";
 
                                   echo "<td><a href='edit-person-info.php?edit=".$row3['user_id']."' class='btn btn-info'>Edit</a></td>";

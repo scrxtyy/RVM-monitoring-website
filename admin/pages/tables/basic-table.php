@@ -20,9 +20,9 @@
   <?php
     $mysqli = new mysqli("localhost", "root", "", "adminRVM");
 
-    $stmt1 = "SELECT * FROM Personal_Info";
-    $stmt2 = "SELECT * FROM Person_Address";
-    $stmt3 = "SELECT * FROM Employee_LogIn";
+    $stmt1 = "SELECT * FROM Personal_Info LIMIT 1,100";
+    $stmt2 = "SELECT * FROM Person_Address LIMIT 1,100 ";
+    $stmt3 = "SELECT * FROM Employee_LogIn LIMIT 1,100";
     $stmt4 = "SELECT * FROM RVM_Assign";
     $stmt5 = "SELECT * FROM RVM_MonitorLog";
 

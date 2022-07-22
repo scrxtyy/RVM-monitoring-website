@@ -65,11 +65,11 @@ $_SESSION['login'] = true;
 
 	</head>
 	<body>
-	<section class="ftco-section">
+	<section class="ftco-section" style="padding-top:10pt!important;">
 		<div class="container">
 			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section" style="padding-top:0pt!important;margin-top:0pt!important;">RVM MONITORING SYSTEM</h2>
+				<div class="col-md-6 text-center mb-5" >
+					<h2 class="heading-section" >RVM MONITORING SYSTEM</h2>
                     <p style="align-items: center;">Please enter admin/employee details.</p>
 				</div>
 			</div>
