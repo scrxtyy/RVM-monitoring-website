@@ -62,12 +62,12 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="/monitoring-website/admin/pages/forms/basic_elements.php">
               <i class="ti-layout-list-post menu-icon"></i>
-              <span class="menu-title">Registration Forms</span>
+              <span class="menu-title">Registration Form</span>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="/monitoring-website/admin/pages/tables/basic-table.php">
               <i class="ti-view-list-alt menu-icon"></i>

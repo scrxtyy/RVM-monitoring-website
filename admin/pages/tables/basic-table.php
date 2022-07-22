@@ -75,12 +75,12 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="../../pages/forms/basic_elements.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">Registration Forms</span>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="../../pages/tables/basic-table.php">
               <i class="ti-view-list-alt menu-icon"></i>
@@ -160,98 +160,6 @@
                 </div>
               </div>
               
-            </div>
-            <div class="col-lg-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Recyclables Collected</h4>
-                  <p class="card-description">
-                    SITUATIONS OF RVM MACHINE
-                  </p>
-                  <div class="table-responsive">
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>
-                            RVM ID
-                          </th>
-                          <th>
-                            Location
-                          </th>
-                          <th>
-                            Total Recyclables Returns
-                          </th>
-                          <th>
-                            Target Recyclables
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>R1920</td>
-                          <td>CITY HALL, STA. ROSA</td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            1000 KG
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>R7283</td>
-                          <td>CARMONA, CAVITE</td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            1000 KG
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>R1297</td>
-                          <td>BRGY. DITA, STA. ROSA</td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            1000 KG
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>R4583</td>
-                          <td>PUP STA. ROSA</td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            1000 KG
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>R3480</td>
-                          <td>BRGY. MESA HOMES, DON JOSE</td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            1000 KG
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
