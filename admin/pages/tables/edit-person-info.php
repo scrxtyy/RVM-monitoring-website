@@ -266,14 +266,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Barangay: </label>
-                            <div class="col-sm-9">
-                              <input type="text" value="<?php echo $barangay; ?>" name="barangay" class="form-control" required>
-                            </div>
-                          </div>
-                        </div>
+                        
                       </div>
                       <!--ROW-->
                       <div class="row">
@@ -281,10 +274,38 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">City: </label>
                             <div class="col-sm-9">
-                              <input type="text" value="<?php echo $city; ?>" name="city" class="form-control" value="Santa Rosa" required>
+                              <select class="form-select" name="city" required>
+                                <option selected><?php echo $city; ?></option>
+                                <?php
+                                  $result5 = $mysqli->query("SELECT * FROM postal_codes");
+                                  while($row5 = $result5->fetch_assoc()){
+                                    echo "<option value=".$row5['city'].">".$row5['city']."</option>"; 
+                                  }
+                                ?>
+                              </select>
                             </div>
                           </div>
                         </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Barangay: </label>
+                            <div class="col-sm-9">
+                              <select id="brgy" class="form-select" name="barangay"required>
+                                <option selected><?php echo $barangay; ?></option>
+                                <?php
+                                  $result5 = $mysqli->query("SELECT * FROM santarosa_barangays");
+                                  while($row5 = $result5->fetch_assoc()){
+                                    echo "<option value=".$row5['barangay'].">".$row5['barangay']."</option>"; 
+                                  }
+                                ?>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    
+                      <!--ROW-->
+                        <div class="row">
                         <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Postal Code: </label>
@@ -294,7 +315,6 @@
                           </div>
                         </div>
                       </div>
-
                       <!--ROW-->
                       <p class="card-description">
                         Log In Information

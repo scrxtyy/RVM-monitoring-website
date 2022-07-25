@@ -18,24 +18,9 @@ $mysqli = new mysqli("localhost", "root", "", "adminRVM");
         $username = '';
         $password = '';
         $rvmassign = '';
-        //$result5 = $mysqli->query("SELECT * FROM santarosa_barangays");
 
-if(isset($_POST['city'])){
 
-    $chosenCity = $_POST['city'];
-    if($chosenCity=="Santa Rosa"){
-        $postal = '4026';
-        $result5 = $mysqli->query("SELECT * FROM santarosa_barangays");
-        header("location: edit-person-info.php");
-        
-    }
-    else if($chosenCity=="Carmona"){
-        $postal = '4116';
-        $result5 = $mysqli->query("SELECT * FROM carmona_barangays");
-        header("location: edit-person-info.php");
-    }
-}
-else if (isset($_POST['save-login'])){  
+if (isset($_POST['save-login'])){  
 
     $firstname = $_POST['firstname'];
     $lastname= $_POST['lastname'];

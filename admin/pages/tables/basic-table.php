@@ -20,17 +20,20 @@
   <?php
     $mysqli = new mysqli("localhost", "root", "", "adminRVM");
 
-    $stmt1 = "SELECT * FROM Personal_Info LIMIT 1,100";
-    $stmt2 = "SELECT * FROM Person_Address LIMIT 1,100 ";
-    $stmt3 = "SELECT * FROM Employee_LogIn LIMIT 1,100";
-    $stmt4 = "SELECT * FROM RVM_Assign";
-    $stmt5 = "SELECT * FROM RVM_MonitorLog";
+    // $stmt1 = "SELECT * FROM Personal_Info LIMIT 1,100";
+    // $stmt2 = "SELECT * FROM Person_Address LIMIT 1,100 ";
+    // $stmt3 = "SELECT * FROM Employee_LogIn LIMIT 1,100";
+    // $stmt4 = "SELECT * FROM RVM_Assign";
+    // $stmt5 = "SELECT * FROM RVM_MonitorLog";
+    
 
-    $result1 = $mysqli->query($stmt1);
-    $result2 = $mysqli->query($stmt2);
-    $result3 =  $mysqli->query($stmt3);
-    $result4 =  $mysqli->query($stmt4);
-    $result5 = $mysqli->query($stmt5);
+    $result1 = $mysqli->query("SELECT * FROM Personal_Info LIMIT 1,100");
+    $result2 = $mysqli->query("SELECT * FROM Person_Address LIMIT 1,100 ");
+    $result3 =  $mysqli->query("SELECT * FROM Employee_LogIn LIMIT 1,100");
+    $result4 =  $mysqli->query("SELECT * FROM RVM_Assign");
+    $result5 = $mysqli->query("SELECT * FROM RVM_MonitorLog");
+    $result6 = $mysqli->query("SELECT * FROM rvm_information");
+    
     
   ?>
   <div class="container-scroller">
@@ -106,24 +109,29 @@
                         <tr>
                           <th>RVM ID</th>
                           <th>Date/Time</th>
-                          <th>Weight Status</th>
-                          <th>Coins Remaining</th>
+                          <th>Latest Weight Status</th>
+                          <th>Latest Coins Number Status</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <?php
-                        while($row5 = $result5->fetch_assoc()){
-                                  echo "<tr><td>".$row5['rvm_id']."</td>
-                                    <td>".$row5['date']." ".$row5['time']."</td><td>".$row5['weight_in_kg']." KG</td><td>".$row5['coins_amt_php'].
-                                    " PHP</td><td>";
+                            while($row6 = $result6->fetch_assoc()){
+                              $r_id = $row6['rvm_id'];
+                              $result7 = $mysqli->query("SELECT * FROM `rvm_monitorlog` WHERE rvm_id= $r_id ORDER BY log_id DESC LIMIT 1;");
+                                  while($row7 = $result7->fetch_assoc()){
+                                    echo "<tr><td>".$row7['rvm_id']."</td>
+                                      <td>".$row7['date']." ".$row7['time']."</td><td>".$row7['weight_in_kg']." KG</td><td>".$row7['coins_amt_php'].
+                                      " PHP</td><td>";
                                   }
+                            }
                                   ?>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
+                <button name="like" class="btn btn-lg btn-outline-light text-primary rounded-0 border-0 d-none d-md-block" type="button" onclick="location.href = 'edit-rvm.php'"> Edit Data on Table</button>
               </div>
             </div>
             <div class="col-lg-12 grid-margin stretch-card">
